@@ -19,7 +19,6 @@ static int GetQueuePeopleNumber()
             resault = resaultParse;
             isOpen = false;
         }
-
         else
         {
             Console.WriteLine("Ошибка ввода. Введите другое число:");
@@ -49,24 +48,32 @@ static Queue<int> CreatingQueue()
 static void ServeAllQueue(Queue<int> buyers, ref int countBuyers, ref int countPurchase)
 {
     Console.WriteLine("Для обслуживания следующего клиента нажмите любую клавишу");
+    buyers = buyers;
+    countBuyers = countBuyers;
+    countPurchase = countPurchase;
 
     while (buyers.Count > 0)
     {
-        Console.Clear();
-        countBuyers = buyers.Count;
-        Console.SetCursorPosition(0, 5);
-        Console.WriteLine("Количество человек в очереди - " + countBuyers);
-        Console.WriteLine("Доход магазина - " + countPurchase);
-        Console.SetCursorPosition(0, 0);
-        Console.WriteLine("Для обслуживания следующего клиента нажмите любую клавишу");
-        Console.ReadKey();
-        countPurchase += buyers.Peek();
-        buyers.Dequeue();
+        ShowInfoShop(buyers, ref countBuyers, ref countPurchase);
+        ShowInfo();
+        countPurchase += buyers.Dequeue();
     }
 
-    countBuyers = buyers.Count;
+    ShowInfoShop(buyers, ref countBuyers, ref countPurchase);
+}
+
+static void ShowInfoShop(Queue<int> buyers, ref int countBuyers, ref int countPurchase)
+{
     Console.Clear();
+    countBuyers = buyers.Count;
     Console.SetCursorPosition(0, 5);
     Console.WriteLine("Количество человек в очереди - " + countBuyers);
     Console.WriteLine("Доход магазина - " + countPurchase);
+}
+
+static void ShowInfo()
+{
+    Console.SetCursorPosition(0, 0);
+    Console.WriteLine("Для обслуживания следующего клиента нажмите любую клавишу");
+    Console.ReadKey();
 }
