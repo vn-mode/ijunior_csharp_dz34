@@ -30,16 +30,18 @@ static int GetQueuePeopleNumber()
 
 static Queue<int> CreatingQueue()
 {
-    Random randomPurchaseCost = new Random();
     int lowerRandomNumber = 50;
     int upperRandomNumber = 1000;
+
+    Random random = new Random();
+    int randomCost = random.Next(lowerRandomNumber, upperRandomNumber);
 
     Queue<int> buyers = new Queue<int>();
     int amountBuyers = GetQueuePeopleNumber();
 
     for (int i = 0; i < amountBuyers; i++)
     {
-        buyers.Enqueue(randomPurchaseCost.Next(lowerRandomNumber, upperRandomNumber));
+        buyers.Enqueue(randomCost);
     }
 
     return buyers;
